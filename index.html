@@ -16,11 +16,22 @@
             align-items: center;
             height: 100vh;
             background-color: thistle;
-            color:white
+            color: white;
+            overflow: hidden;
+            position: relative;
         }
+
+        .icon {
+            position: absolute;
+            width: 48px;
+            height: 48px;
+            opacity: 0.5;
+        }
+
         h1 {
             margin-top: 50px;
         }
+
         .container {
             background: black;
             padding: 30px;
@@ -28,7 +39,9 @@
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
             width: 400px;
             text-align: center;
+            z-index: 10;
         }
+
         textarea {
             width: 100%;
             height: 150px;
@@ -37,31 +50,80 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
+
         button {
             padding: 10px 20px;
             border: none;
-            background-color: orchid ;
+            background-color: orchid;
             color: #fff;
             border-radius: 5px;
             cursor: pointer;
         }
+
         button:hover {
-            background-color: orchid;
+            background-color: #d372e1;
         }
+
         .result {
             margin-top: 20px;
             font-size: 20px;
             font-weight: bold;
         }
+
+        .result img {
+            display: none;
+            width: 100px;
+            height: auto;
+        }
+
+        /* Make GIFs responsive within the container */
+        #gif-container {
+            width: 100%;
+            height: auto;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+
+        #gif-container img {
+            width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 <body>
+    <script>
+        // Dynamically generate and scatter 30 icons
+        const icons = [
+            "https://img.icons8.com/emoji/48/000000/at-emoji.png",
+            "https://img.icons8.com/color/48/000000/gmail-new.png",
+            "https://img.icons8.com/color/48/000000/email.png",
+            "https://img.icons8.com/emoji/48/000000/exclamation-mark-emoji.png",
+            "https://img.icons8.com/emoji/48/000000/question-mark-emoji.png"
+        ];
+
+        for (let i = 0; i < 30; i++) {
+            const icon = document.createElement('img');
+            icon.src = icons[Math.floor(Math.random() * icons.length)];
+            icon.className = 'icon';
+            icon.style.top = Math.random() * 85 + 'vh'; // Ensure within visible vertical area
+            icon.style.left = Math.random() * 85 + 'vw'; // Ensure within visible horizontal area
+            document.body.appendChild(icon);
+        }
+    </script>
+
     <div class="container">
         <h1 class="mb-4">E-mail Spam Classifier</h1>
         <textarea id="emailContent" class="form-control" placeholder="Enter email content here..."></textarea>
         <button onclick="classifyEmail()" class="btn btn-primary mt-3">Classify</button>
-        <p id="result" class="mt-3"></p>
+        <p id="result" class="mt-3">
+            <span id="ham-text"></span>
+            <div id="gif-container">
+                <img id="spamGif" src="https://media.giphy.com/media/d2jgpwowg1DRE7mw/giphy.gif?cid=ecf05e47nb89624ud09lexzmbh0lhc1fpfvoqgv7shnqdszc&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="Spam">
+                <img id="hamGif" src="C:/Users/pc/Downloads/Saul Goodman I Know What Youre Thinking GIF by Better Call Saul.gif" alt="Ham">
+            </div>
+        </p>
     </div>
+
     <!-- Bootstrap JS and dependencies -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -69,11 +131,26 @@
     <script>
         function classifyEmail() {
             const emailContent = document.getElementById('emailContent').value;
-            // Here you would typically send the emailContent to your backend for classification
-            // For demonstration, we'll just display a dummy result
-            const result = emailContent.includes('spam') ? 'Spam' : 'Not Spam';
-            document.getElementById('result').innerText = `Result: ${result}`;
+            const resultElement = document.getElementById('result');
+            const spamGif = document.getElementById('spamGif');
+            const hamGif = document.getElementById('hamGif');
+            const hamText = document.getElementById('ham-text');
+
+            // Simulate email classification logic
+            if (emailContent.toLowerCase().includes('spam')) {
+                resultElement.textContent = 'Result: Spam';
+                spamGif.style.display = 'block';
+                hamGif.style.display = 'none';
+                hamText.textContent = ''; // Clear any previous Ham text
+            } else {
+                resultElement.textContent = 'Result: Ham';
+                spamGif.style.display = 'none';
+                hamGif.style.display = 'block';
+                hamText.textContent = 'Ham'; // Display Ham text
+            }
         }
     </script>
 </body>
 </html>
+
+
