@@ -15,14 +15,14 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #121212;
+            background-color: thistle;
             color:white
         }
         h1 {
             margin-top: 50px;
         }
         .container {
-            background: #fff;
+            background: black;
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
@@ -40,13 +40,13 @@
         button {
             padding: 10px 20px;
             border: none;
-            background-color: #007BFF;
+            background-color: orchid ;
             color: #fff;
             border-radius: 5px;
             cursor: pointer;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: orchid;
         }
         .result {
             margin-top: 20px;
@@ -57,7 +57,7 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="mb-4">Email Spam Classifier</h1>
+        <h1 class="mb-4">E-mail Spam Classifier</h1>
         <textarea id="emailContent" class="form-control" placeholder="Enter email content here..."></textarea>
         <button onclick="classifyEmail()" class="btn btn-primary mt-3">Classify</button>
         <p id="result" class="mt-3"></p>
@@ -77,4 +77,3 @@
     </script>
 </body>
 </html>
-    
