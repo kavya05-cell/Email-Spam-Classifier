@@ -16,17 +16,14 @@
             background-color: #f4f4f4;
         }
         .container {
-            background-color: #fff;
+            background: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            width: 400px;
             text-align: center;
         }
-        .container h1 {
-            margin-bottom: 20px;
-        }
-        .container textarea {
+        textarea {
             width: 100%;
             height: 100px;
             margin-bottom: 20px;
@@ -34,15 +31,15 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
-        .container button {
+        button {
             padding: 10px 20px;
             border: none;
-            border-radius: 4px;
-            background-color: #007bff;
+            background-color: #007BFF;
             color: #fff;
+            border-radius: 4px;
             cursor: pointer;
         }
-        .container button:hover {
+        button:hover {
             background-color: #0056b3;
         }
     </style>
@@ -50,7 +47,7 @@
 <body>
     <div class="container">
         <h1>Email Spam Classifier</h1>
-        <textarea id="emailContent" placeholder="Paste your email content here..."></textarea>
+        <textarea id="emailContent" placeholder="Enter email content here..."></textarea>
         <button onclick="classifyEmail()">Classify</button>
         <p id="result"></p>
     </div>
@@ -60,7 +57,7 @@
             const emailContent = document.getElementById('emailContent').value;
             // Here you would typically send the emailContent to your backend for classification
             // For demonstration, we'll just display a dummy result
-            const result = Math.random() > 0.5 ? 'Spam' : 'Not Spam';
+            const result = emailContent.includes('spam') ? 'Spam' : 'Not Spam';
             document.getElementById('result').innerText = `Result: ${result}`;
         }
     </script>
