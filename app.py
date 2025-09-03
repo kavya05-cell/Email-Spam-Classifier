@@ -46,7 +46,7 @@ tfidf = pickle.load(open('vectorizer.pkl', 'rb'))
 model = pickle.load(open('model.pkl', 'rb'))
 
 # Streamlit UI
-st.title("📧 Email Spam Classifier")
+st.title("Email Spam Classifier")
 
 input_sms = st.text_input("Enter the message")
 
@@ -62,5 +62,6 @@ if st.button('Predict'):
         st.header("Spam!!")
     else:
         st.header("Not Spam")
+
 
 
